@@ -96,3 +96,16 @@ Best to list in list in same order as indexed row order.
 If search is slow, good candidate for index.
 
 NOT IN is one of the least efficient conditions.
+    Must run on all values, and does so on every row.
+
+BETWEEN
+
+[NOT] LIKE 
+    "%abcdefg%"
+    "abc[de]fg" or
+    "abc[d-f]g" within range
+    "abc[^d-f]g" not within range
+    "abc[d-f]%" or
+
+You can deploy C# functions to SQL Server
+
