@@ -136,3 +136,17 @@ Check out murach.com to get course material. 2012 version will have CLR exercise
 Inner, outer, self, cross
 You can have additional operators as part of join condition.
 Best practice is to use table name with column name.
+Temporary table name aliases are called correlation names.
+
+Object names can be fully qualified(including server name)
+linked_server.database.schema.object
+schema = usually dbo
+object = table name
+Some limitations are put on selecting XML from linked server.
+self-join = joining table on itself
+Example is finding vendors that are in the same city as one another.
+Multiple joins create interim tables
+
+Can be select * from table1, table2, etc where all conditions
+Bad idea. Cross joins, big interim table
+
