@@ -89,3 +89,10 @@ AND should not be short circuited, CASE and IIF are short-circuited.
 IN clauses are short-circuited.
 invoice total - payment total - credit total = balance due.
 
+IN
+Used with WHERE to pass in array of matches
+
+Best to list in list in same order as indexed row order.
+If search is slow, good candidate for index.
+
+NOT IN is one of the least efficient conditions.
