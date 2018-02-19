@@ -204,4 +204,15 @@ SELECT ..
 FROM ...
 WHERE ...
 GROUP BY groupByList
-HAVING  search Condition
+HAVING  searchCondition
+ORDER BY ...
+
+group by filters data before grouping,
+having groups after grouping
+
+ie: SELECT Id, AVG(total) as TheTotal
+    FROM ...
+    GROUP BY Id
+    HAVING (AVG(total) > 2000)
+    ORDER BY TheTotal DESC;
+
