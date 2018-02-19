@@ -1,3 +1,15 @@
 bparker5@lsu.edu
 Brian Parker
 12 Chapters
+
+Chapter 1
+Keys - unique identifier(usually id)
+Referential integrity
+T-sql is a representation of the standard
+History
+DML - Data manipulation lang
+    select, insert, update, delete
+DDL - data definition lang.
+    create, alter, drop
+
+Views save execution plan to aid in performance
