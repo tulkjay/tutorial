@@ -31,3 +31,5 @@ Use database diagrams to view table relationship diagrams
 page 65 for 1-1, 1-many, many-many
 Default select quantity can be changed in options
 If editing, locks are placed on data being shown
+
+Batch terminator - ie: GO
