@@ -131,4 +131,4 @@ Useful for paging when combined with stored procedures.
 Add USE to set context of current database.
 You can turn on Estimated Execution Plan to see times for queries.
 
-
+Chapter 4 Joins
