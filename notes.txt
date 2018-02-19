@@ -42,6 +42,8 @@ Chapter 3
 Order statements execute
 FROM - figures out tables used, joins, indexing
 WHERE - looks for filters/exclusion conditions
+GROUP BY
+HAVING
 SELECT - minimize data size
 ORDER BY - orders
 
@@ -185,3 +187,21 @@ Only keep rows where all data points match between results. Looking for duplicat
 Select ... from ...
 INTERSECT Select ... from ...
 
+Chapter 5
+Summary queries
+Aggregate functions
+AVG
+MIN
+MAX
+COUNT or COUNT(*)
+COUNT(*) is number of rows(preferred)
+
+If column supports null values, count(columnThatSupportsNulls) excludes count for columns with null
+    values.
+
+GROUP BY
+SELECT ..
+FROM ...
+WHERE ...
+GROUP BY groupByList
+HAVING  search Condition
