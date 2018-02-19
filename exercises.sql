@@ -56,3 +56,61 @@ WHERE ([InvoiceTotal] - [PaymentTotal] + [CreditTotal] <= 0.00 AND PaymentDate I
 	OR
 	([InvoiceTotal] - [PaymentTotal] + [CreditTotal] > 0.00 AND PaymentDate IS NOT NULL)
 ORDER BY PaymentDate
+
+--Chapter 4
+--Chapter 4
+--1
+SELECT * from Vendors, Invoices
+
+--2
+SELECT DISTINCT
+v.VendorName,
+i.InvoiceNumber,
+i.InvoiceDate,
+i.InvoiceTotal - i.PaymentTotal + i.CreditTotal AS Balance
+FROM Vendors v JOIN Invoices i ON i.InvoiceTotal - i.PaymentTotal + i.CreditTotal > 0
+
+--3
+SELECT
+v.VendorName,
+v.DefaultAccountNo,
+ga.AccountDescription
+FROM Vendors v 
+JOIN GLAccounts ga ON v.DefaultAccountNo = ga.AccountNo
+ORDER BY ga.AccountDescription, v.VendorName
+
+--4
+--skip
+
+--5
+SELECT 
+v.VendorName AS Vendor,
+i.InvoiceDate AS 'Date',
+i.InvoiceNumber AS Number,
+li.InvoiceSequence AS '#',
+li.InvoiceLineItemAmount AS LineItem
+FROM Vendors v, Invoices i, InvoiceLineItems li
+ORDER BY v.VendorName, i.InvoiceDate, i.InvoiceNumber, li.InvoiceSequence
+
+--6
+SELECT v1.VendorName, v1.VendorID, CONCAT(v1.VendorContactFName, ' ', v1.VendorContactLName) AS 'Name'
+FROM Vendors v1
+JOIN Vendors v2 ON v1.VendorContactFName = v2.VendorContactFName AND v1.VendorName <> v2.VendorName
+ORDER BY Name
+
+--7
+SELECT ga.AccountNo, ga.AccountDescription
+FROM GLAccounts ga
+LEFT OUTER JOIN InvoiceLineItems li ON ga.AccountNo = li.AccountNo
+WHERE li.AccountNo IS NULL
+
+--8
+SELECT VendorName, VendorState 
+FROM Vendors 
+WHERE VendorState = 'CA'
+UNION
+SELECT VendorName, 'Outside CA' as VendorState 
+FROM Vendors 
+WHERE VendorState <> 'CA'
+ORDER BY VendorName
+

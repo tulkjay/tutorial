@@ -156,3 +156,32 @@ Useful for finding null values.
 
 Multiple joins will run join on interim table.
 Most of the checks can be avoided by using foreign keys, otherwise used for finding entities with no matches.
+
+Be careful mixing inner and outer joins. More reliable to use inner, then outer.
+
+CROSS JOIN
+Cartesian Product of two tables.
+Useful for testing or some SQL fanciness.
+
+UNION
+Takes results of multiple selects and creates final table.
+Each select must return same number of columns.
+Each column must have a compatible data type.
+No order by clause in the select statements.
+Column names come from the first select statement.
+
+Nifty: 
+SELECT 'value' as column name, ...
+
+Better to use CASE, WHEN for multiple UNION
+
+EXCEPT
+Only keep rows where data points do not match. Looking for different.
+Select ... from ...
+EXCEPT Select ... from ...
+
+INTERSECT
+Only keep rows where all data points match between results. Looking for duplicates.
+Select ... from ...
+INTERSECT Select ... from ...
+
