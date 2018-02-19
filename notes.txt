@@ -117,3 +117,14 @@ ORDER BY
     You can order by an alias
     NULL goes to top if ASC
 
+    You can order by expression
+OFFSET FETCH
+More flexible select top
+used to modify order by results
+ie:
+    Select...
+    Order by name DESC
+    OFFSET 0 ROWS
+    FETCH FIRST 5 ROWS ONLY
+Useful for paging when combined with stored procedures.
+
