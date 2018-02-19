@@ -39,3 +39,21 @@ NOTE: Check out temporal tables
 concat, lag, lead, choose functions
 
 Chapter 3
+Order statements execute
+FROM - figures out tables used, joins, indexing
+WHERE - looks for filters/exclusion conditions
+SELECT - minimize data size
+ORDER BY - orders
+
+Order by is performance heavy
+Can be optimized by doing ordering on client(ie: report server)
+
+SELECT
+*
+comma separated list
+can calculate items in select list
+IE SELECT itemsA + itemsB as results FROM ...
+
+WHERE
+between: for dates or numbers. Inclusive
+
