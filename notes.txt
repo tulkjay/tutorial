@@ -231,5 +231,14 @@ CUBE
 Give every combination of items in group by
 GROUP BY CUBE(VendorID) or GROUP BY VendorId WITH CUBE
 
+GROUPING(to be discussed) can be combined with CUBE to get null values in a given column.
 
+GROUPING SETS(group1, group2)
+Will show results of group1, then group2
 
+GROUPING SET(a,b, c, ()) -- parentheses are used to say group across entire row
+This runs multiple group bys on different group sets
+
+OVER
+Allows you to add row detail information(that have not been aggregated or grouped)
+PARTITION BY is similar to GROUP BY 
