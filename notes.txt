@@ -2,7 +2,7 @@ bparker5@lsu.edu
 Brian Parker
 12 Chapters
 
-Chapter 1
+Chapter 1 -Intro
 Keys - unique identifier(usually id)
 Referential integrity
 T-sql is a representation of the standard
@@ -13,3 +13,21 @@ DDL - data definition lang.
     create, alter, drop
 
 Views save execution plan to aid in performance
+
+Chapter 2 -SSMS
+TCP/IP must be enabled to connect to server
+At least Windows auth is required, SQL server auth can be added
+Attaching existing db. Attach .mdf database file
+retore -> backup database, usually .bak
+Log file is .ldf
+db can be detached, move .mdf, and attach elsewhere
+
+Restores will be done as version at time of db creation, can be updated in options
+
+Recovery model -
+Full keeps transaction log, simple does not
+Setting to full and not backing up can cause transaction history to get very large
+Use database diagrams to view table relationship diagrams
+page 65 for 1-1, 1-many, many-many
+Default select quantity can be changed in options
+If editing, locks are placed on data being shown
