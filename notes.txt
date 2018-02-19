@@ -216,3 +216,20 @@ ie: SELECT Id, AVG(total) as TheTotal
     HAVING (AVG(total) > 2000)
     ORDER BY TheTotal DESC;
 
+You can use the WHERE clause to reference any column in the FROM list(HAVING = only in SELECT or GROUP BY).
+Unless filtering by aggregate results(use HAVING).
+
+Summary functions that use GROUP BY
+WITH ROLLUP
+GROUP BY ROLLUP(VendorID)
+Adds up remaining columns not included in Group by
+ROLLUP removes ability to add DISTINCT
+Adds multiple summary rows if GROUP BY multiple columns
+Add DESC to see totals at bottom
+
+CUBE
+Give every combination of items in group by
+GROUP BY CUBE(VendorID) or GROUP BY VendorId WITH CUBE
+
+
+
