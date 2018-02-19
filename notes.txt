@@ -242,3 +242,11 @@ This runs multiple group bys on different group sets
 OVER
 Allows you to add row detail information(that have not been aggregated or grouped)
 PARTITION BY is similar to GROUP BY 
+
+Use Over(ORDER BY column name) to calculate moving average(without partition by, order by will show
+    aggregate values as the selected column name changes, ie: Date changes)
+
+ie:
+    SUM(column name) OVER (ORDER BY/PARTITION BY columnName) as OverResultColumnName
+
+

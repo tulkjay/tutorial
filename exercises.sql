@@ -119,3 +119,75 @@ UNION
 	FROM Vendors 
 	WHERE VendorState <> 'CA'
 ORDER BY VendorName
+
+--Chapter 5
+--1
+SELECT VendorID,
+	SUM(PaymentTotal) AS PaymentSum
+FROM [dbo].[Invoices]
+GROUP BY VendorID
+
+--2
+SELECT TOP(10)
+	v.VendorName,
+	SUM(i.PaymentTotal) AS PaymentSum
+FROM Vendors v
+JOIN Invoices i on i.VendorID = v.VendorID
+GROUP BY v.VendorName
+ORDER BY PaymentSum DESC
+
+--3
+SELECT
+	v.VendorName,
+	Count(*) AS InvoiceCount,
+	SUM(i.InvoiceTotal) AS InvoiceSum
+FROM Vendors v
+JOIN Invoices i on i.VendorID = v.VendorID
+GROUP BY v.VendorName
+ORDER BY InvoiceCount DESC
+
+--4
+SELECT
+	li.AccountNo,
+	COUNT(*) AS LineItemCount,
+	SUM(li.InvoiceLineItemAmount) AS LineItemSum
+FROM InvoiceLineItems li
+JOIN GLAccounts ga on ga.AccountNo = li.AccountNo
+GROUP BY li.AccountNo
+ORDER BY LineItemCount DESC
+
+--5
+SELECT
+	li.AccountNo,
+	i.InvoiceDate,
+	COUNT(*) AS LineItemCount,
+	SUM(li.InvoiceLineItemAmount) AS LineItemSum
+FROM InvoiceLineItems li
+JOIN GLAccounts ga on ga.AccountNo = li.AccountNo
+JOIN Invoices i ON li.InvoiceID = i.InvoiceID
+WHERE i.InvoiceDate BETWEEN '2015-12-01' AND '2016-02-29'
+GROUP BY li.AccountNo, i.InvoiceDate
+ORDER BY LineItemCount DESC
+
+--6
+SELECT
+SUM(li.InvoiceLineItemAmount) AS InvoiceLineItemsSum
+FROM
+Invoices i JOIN InvoiceLineItems li on i.InvoiceID = li.InvoiceID
+GROUP BY ROLLUP(li.InvoiceLineItemAmount)
+ORDER BY InvoiceLineItemsSum
+
+--7
+SELECT
+v.VendorName,
+ga.AccountDescription,
+Count(*) AS LineItemCount,
+SUM(li.InvoiceLineItemAmount) AS LineItemAmount
+FROM 
+Vendors v
+JOIN Invoices i ON v.VendorID = i.VendorID
+JOIN InvoiceLineItems li ON i.InvoiceID = li.InvoiceID
+JOIN GLAccounts ga on ga.AccountNo = li.AccountNo
+GROUP BY CUBE(v.VendorName), ga.AccountDescription
+ORDER BY v.VendorName, ga.AccountDescription DESC
+
