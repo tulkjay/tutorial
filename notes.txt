@@ -131,4 +131,8 @@ Useful for paging when combined with stored procedures.
 Add USE to set context of current database.
 You can turn on Estimated Execution Plan to see times for queries.
 
-Chapter 4 Joins
+Chapter 4 Joins AKA two or more table
+Check out murach.com to get course material. 2012 version will have CLR exercises.
+Inner, outer, self, cross
+You can have additional operators as part of join condition.
+Best practice is to use table name with column name.
