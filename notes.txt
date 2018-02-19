@@ -76,4 +76,16 @@ GetDate, DateDiff
 convert takes a third parameter to set preferred format.
 
 Distinct
+TOP: Select top 5 percent
+With ties: will include order by matches that occur on 
+    the last row of the result set.
+
+WHERE
+    All conditions result in bool or null value. Condition must be true to be included.
+IS NULL
+AND, OR, IS NOT NULL, NOT
+
+AND should not be short circuited, CASE and IIF are short-circuited.
+IN clauses are short-circuited.
+invoice total - payment total - credit total = balance due.
 
