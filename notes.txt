@@ -148,5 +148,8 @@ Example is finding vendors that are in the same city as one another.
 Multiple joins create interim tables
 
 Can be select * from table1, table2, etc where all conditions
-Bad idea. Cross joins, big interim table
+Bad idea. Cross joins, big interim table.
 
+LEFT, RIGHT, FULL OUTER JOIN
+NULL is returned for all values returned with no match.
+Useful for finding null values.
