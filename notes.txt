@@ -33,3 +33,5 @@ Default select quantity can be changed in options
 If editing, locks are placed on data being shown
 
 Batch terminator - ie: GO
+Use query designer to build selects
+msdn will have documentation on all versions of SQL server
