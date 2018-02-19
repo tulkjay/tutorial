@@ -35,3 +35,7 @@ If editing, locks are placed on data being shown
 Batch terminator - ie: GO
 Use query designer to build selects
 msdn will have documentation on all versions of SQL server
+NOTE: Check out temporal tables
+concat, lag, lead, choose functions
+
+Chapter 3
