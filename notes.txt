@@ -1,4 +1,4 @@
-bparker5@lsu.edu
+bparke5@lsu.edu
 Brian Parker
 12 Chapters
 
@@ -108,4 +108,12 @@ BETWEEN
     "abc[d-f]%" or
 
 You can deploy C# functions to SQL Server
+
+IS NULL, IS NOT NULL, or ISNULL(column, defaultValue)
+
+ORDER BY
+    ASC is default, or DESC
+    You can order by columns outside of select(unless using group by)
+    You can order by an alias
+    NULL goes to top if ASC
 
