@@ -48,12 +48,32 @@ ORDER BY - orders
 Order by is performance heavy
 Can be optimized by doing ordering on client(ie: report server)
 
+In documentation, underlines values are default, brackets are optional
+
 SELECT
 *
 comma separated list
 can calculate items in select list
 IE SELECT itemsA + itemsB as results FROM ...
+With Ties
 
 WHERE
 between: for dates or numbers. Inclusive
+
+when renaming, use brackets or quotes to add spaces
+renaming can be done with equals syntax, where alias comes first
+
+pg. 95 Strings
+data can be concatenated
+concat function will convert NULL to "" automagically
+
+SELECT CONCAT(column1, column2) AS CombinedList;
+
+Standard order of precedence, use parentheses 
+functions
+LEFT(column, n of spaces to capture)
+GetDate, DateDiff
+convert takes a third parameter to set preferred format.
+
+Distinct
 
