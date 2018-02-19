@@ -148,46 +148,62 @@ ORDER BY InvoiceCount DESC
 
 --4
 SELECT
-	li.AccountNo,
+	ga.AccountDescription,
 	COUNT(*) AS LineItemCount,
 	SUM(li.InvoiceLineItemAmount) AS LineItemSum
 FROM InvoiceLineItems li
 JOIN GLAccounts ga on ga.AccountNo = li.AccountNo
-GROUP BY li.AccountNo
+GROUP BY ga.AccountDescription
+HAVING COUNT(*) > 1
 ORDER BY LineItemCount DESC
 
 --5
 SELECT
-	li.AccountNo,
-	i.InvoiceDate,
+	ga.AccountDescription,
 	COUNT(*) AS LineItemCount,
 	SUM(li.InvoiceLineItemAmount) AS LineItemSum
 FROM InvoiceLineItems li
 JOIN GLAccounts ga on ga.AccountNo = li.AccountNo
 JOIN Invoices i ON li.InvoiceID = i.InvoiceID
 WHERE i.InvoiceDate BETWEEN '2015-12-01' AND '2016-02-29'
-GROUP BY li.AccountNo, i.InvoiceDate
+GROUP BY ga.AccountDescription
+HAVING COUNT(*) > 1
 ORDER BY LineItemCount DESC
 
 --6
 SELECT
+li.AccountNo,
 SUM(li.InvoiceLineItemAmount) AS InvoiceLineItemsSum
-FROM
-Invoices i JOIN InvoiceLineItems li on i.InvoiceID = li.InvoiceID
-GROUP BY ROLLUP(li.InvoiceLineItemAmount)
-ORDER BY InvoiceLineItemsSum
+FROM Invoices i 
+JOIN InvoiceLineItems li on i.InvoiceID = li.InvoiceID
+GROUP BY li.AccountNo WITH ROLLUP
 
 --7
 SELECT
-v.VendorName,
-ga.AccountDescription,
-Count(*) AS LineItemCount,
-SUM(li.InvoiceLineItemAmount) AS LineItemAmount
-FROM 
-Vendors v
-JOIN Invoices i ON v.VendorID = i.VendorID
-JOIN InvoiceLineItems li ON i.InvoiceID = li.InvoiceID
-JOIN GLAccounts ga on ga.AccountNo = li.AccountNo
-GROUP BY CUBE(v.VendorName), ga.AccountDescription
-ORDER BY v.VendorName, ga.AccountDescription DESC
+	v.VendorName,
+	ga.AccountDescription,
+	Count(*) AS LineItemCount,
+	SUM(li.InvoiceLineItemAmount) AS LineItemAmount
+FROM Vendors v
+	JOIN Invoices i ON v.VendorID = i.VendorID
+	JOIN InvoiceLineItems li ON i.InvoiceID = li.InvoiceID
+	JOIN GLAccounts ga on ga.AccountNo = li.AccountNo
+GROUP BY v.VendorName, ga.AccountDescription
+ORDER BY v.VendorName, ga.AccountDescription
 
+--8
+SELECT VendorName,
+COUNT(DISTINCT li.AccountNo) AS [#]
+FROM Vendors v
+	JOIN Invoices i ON v.VendorID = i.VendorID
+	JOIN InvoiceLineItems li ON i.InvoiceID = li.InvoiceID
+GROUP BY v.VendorName
+HAVING COUNT(DISTINCT li.AccountNo) > 1
+ORDER BY v.VendorName
+
+--9
+SELECT VendorID, InvoiceDate, InvoiceTotal,
+SUM(InvoiceTotal) OVER (PARTITION BY VendorId) AS VendorTotal,
+COUNT(InvoiceTotal) OVER (PARTITION BY VendorId) AS VendorCount,
+AVG(InvoiceTotal) OVER (PARTITION BY VendorId) AS VendorAvg
+FROM Invoices
