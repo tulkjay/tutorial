@@ -153,3 +153,6 @@ Bad idea. Cross joins, big interim table.
 LEFT, RIGHT, FULL OUTER JOIN
 NULL is returned for all values returned with no match.
 Useful for finding null values.
+
+Multiple joins will run join on interim table.
+Most of the checks can be avoided by using foreign keys, otherwise used for finding entities with no matches.
