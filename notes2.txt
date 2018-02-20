@@ -248,4 +248,8 @@ LAST_VALUE ""
 LEAD - Retrieve data from looking ahead.
 LAG - Retrieves data from a previous row in a result set. Third parameter is the default value if no previous found.
 
-PERCENT_RANK, CUME_DIST, PERCENTILE_CONT
+PERCENT_RANK, CUME_DIST, PERCENTILE_CONT/DISC
+
+
+
+

@@ -147,3 +147,51 @@ WHERE VendorState NOT IN
 	FROM VendorCopy v JOIN InvoiceCopy i
 	ON v.VendorID = i.VendorID)
 
+--Chapter 9
+--1
+SELECT 
+	CONCAT(VendorContactFName, ' ', LEFT(VendorContactLName, 1), '.')
+	AS Contact,
+	SUBSTRING(VendorPhone, 7, 8) AS Phone
+	--OR RIGHT()
+FROM Vendors
+WHERE VendorPhone LIKE '(559%'
+ORDER BY VendorContactFName, VendorContactLName
+
+--2
+SELECT InvoiceNumber,
+	InvoiceTotal - PaymentTotal - CreditTotal AS BalanceDue,
+	InvoiceDueDate
+FROM Invoices
+WHERE 
+InvoiceDueDate < GETDATE() + 30 AND
+InvoiceTotal - PaymentTotal - CreditTotal <> 0
+
+--3
+SELECT InvoiceNumber,
+	InvoiceTotal - PaymentTotal - CreditTotal AS BalanceDue,
+	InvoiceDueDate
+FROM Invoices
+WHERE 
+InvoiceDueDate < EOMONTH(GETDATE()) AND
+InvoiceTotal - PaymentTotal - CreditTotal <> 0
+
+--4
+SELECT 
+	CASE 
+		WHEN GROUPING(SUM(li.InvoiceLineItemAmount)) = 1 THEN '*ALL*'
+		ELSE SUM(li.InvoiceLineItemAmount)
+	END AS LineItemSum,
+	CASE 
+		WHEN GROUPING(gla.AccountDescription) = 1 THEN '*ALL*'
+		ELSE gla.AccountDescription
+	END AS Account,
+		CASE 
+		WHEN GROUPING(v.VendorState) = 1 THEN '*ALL*'
+		ELSE v.VendorState
+	END AS State
+FROM InvoiceLineItems li
+JOIN Invoices i ON li.InvoiceID = i.InvoiceID
+JOIN Vendors v ON i.VendorID = v.VendorID
+JOIN GLAccounts gla ON gla.AccountNo = v.DefaultAccountNo
+GROUP BY gla.AccountDescription, v.VendorState WITH CUBE
