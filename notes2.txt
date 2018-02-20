@@ -16,3 +16,17 @@ Very useful with IN clause.
 
 IN can be substituted with LEFT JOIN(LEFT JOIN is more efficient for NOT IN)
 
+WHERE expression comparison_operator [SOME | ANY | ALL] (subquery)
+If subquery returns scalar, comparison_operator can be used.
+Can be used against a list of values when used with ALL, SOME, or ANY
+
+SOME and ANY are equivalent. SOME is ANSI standard.
+
+The value comes from being able to apply comparison operators.
+
+Correlated Subqueries
+Reference FROM alias
+Prefix column names with table names in order to prevent accidental outer query references.
+
+[NOT] EXISTS
+Shows if subquery returns a data set.
