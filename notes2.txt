@@ -187,4 +187,65 @@ EOMONTH,
 DATEFROMPARTS,
 ISDATE-returns 1 or 0 if possible. Also useful for time.
 
+Be careful when searching dates. Ignore time if not needed:
+CONVERT to date, 
+WHERE MONTH(X) = X AND DAY(X) = X AND YEAR(X) = X
 
+CAST to char to datetime to remove time component
+
+Same issues when searching for times. Take out date portion.
+
+CASE
+CASE input_expression
+    WHEN ... THEN ...
+    CAN BE CHAINED
+    ELSE result-expression
+END
+
+SELECT a, b
+    CASE b
+        WHEN 1 THEN 'RESULT 1'
+        ...
+    END AS alias
+FROM Invoices
+
+Case is a short circuit evaluation
+
+IIF - Shorthand case statement
+Can be nested.
+IIF(expression, true_value, false_value)
+
+CHOOSE - replace first param value with items supplied
+COALESCE(expression1 [,expression2]) - 
+returns expression2 if expression1 is null. Can be continued. ie: returning first viable phone number of 3.
+Will pick the first column to return a non-null value.
+
+ISNULL(expression, replacement_value)
+
+GROUPING - Detect which rows are being added as summary rows, can return different value.
+    For readability.
+    Returns 1 if 
+
+RANKING FUNCTIONS
+ROW_NUMBER()
+RANK
+DENSERANK
+NTILE(integer_expression)
+
+These use the OVER definition to tell how to order the partitions.
+select x() OVER(ORDER BY a) AS alias
+FROM tableName
+
+Rank and Dense Rank will allow tie values.
+Rank will skip values(if there are ties), Dense Rank will not skip values for ties.
+
+NTILE(2)
+Assigns group numbers to rows.
+NTILE(how many groups you would like to create) OVER(ORDER BY x) AS tileName
+
+FIRST_VALUE (scalar_expression) OVER ([partition-by clause] order by clause [rows-range-clause])
+LAST_VALUE ""
+LEAD - Retrieve data from looking ahead.
+LAG - Retrieves data from a previous row in a result set. Third parameter is the default value if no previous found.
+
+PERCENT_RANK, CUME_DIST, PERCENTILE_CONT
