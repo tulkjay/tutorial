@@ -141,3 +141,22 @@ datetime2 - 0001-9999 and very precise time
 datetimeoffset - datetime2 + timezone offset
 p.247 for common date and time formats
 
+types that need to be explicitly converted:
+char, varchar, nchar, nvarchar <-> money, smallmoney
+datetime, smalldatetime -> integer types
+
+use CAST or CONVERT to explicitly cast.
+
+CAST(expression as data_type)
+CONVERT: same as CAST with formatting option: CONVERT(data_type, expression [, style])
+useful for formatting dates and times.
+TRY_CONVERT: Same format as CONVERT. Attempts to convert, returns NULL if invalid
+
+STR(float[, length[,decimal]]),
+CHAR(int) = returns ASCII equivalent
+ASCII(string)
+NCHAR(int)
+UNICODE(string)
+
+nifty: CHAR functions: tab(9), line feed(10), carriage returns(13)
+
