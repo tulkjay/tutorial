@@ -112,3 +112,32 @@ WHEN NOT MATCHED BY SOURCE
 MERGE must be ended with a semicolon.
 WHEN NOT MATCHED BY SOURCE is used to delete a row from the target table.
 
+Chapter 8 SQL Data Types
+String, Numeric, Temporal(Date/Time), Other(Binary, XML, Geometric, etc)
+ANSI standard
+Numeric
+decimal (precision, scale)
+    precision: storage size.
+    scale: how much to round up.
+scale can be any number from 0 to the precision.
+
+String
+char(size) --default is 8000
+varchar(n)  --default is 8000
+size can be max, and will increase size all the way.
+
+varchar will size space taken based on material.
+nchar() = national character value. These support Unicode characters.
+nvarchar() = national character value.
+varchar is replacement for text.
+
+char and varchar can be converted to n[char|varchar] without loss.
+
+datetime 1753-9999
+smalldatetime 1900-2079
+date 0001-9999
+time 1*10^-7
+datetime2 - 0001-9999 and very precise time
+datetimeoffset - datetime2 + timezone offset
+p.247 for common date and time formats
+
