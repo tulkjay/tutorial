@@ -10,3 +10,9 @@ Can return scalar(single value), single column, or  table.
 
 Order by inside of subquery is used to position data into the correct location.
 Do actual ordering on outer query.
+Usually subquery can be turned into inner joins.
+Outer query cannot select from tables used in subquery.
+Very useful with IN clause.
+
+IN can be substituted with LEFT JOIN(LEFT JOIN is more efficient for NOT IN)
+
