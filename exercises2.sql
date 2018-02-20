@@ -179,19 +179,22 @@ InvoiceTotal - PaymentTotal - CreditTotal <> 0
 --4
 SELECT 
 	CASE 
-		WHEN GROUPING(SUM(li.InvoiceLineItemAmount)) = 1 THEN '*ALL*'
-		ELSE SUM(li.InvoiceLineItemAmount)
-	END AS LineItemSum,
-	CASE 
 		WHEN GROUPING(gla.AccountDescription) = 1 THEN '*ALL*'
 		ELSE gla.AccountDescription
 	END AS Account,
 		CASE 
 		WHEN GROUPING(v.VendorState) = 1 THEN '*ALL*'
 		ELSE v.VendorState
-	END AS State
+	END AS State,
+	SUM(li.InvoiceLineItemAmount) AS LineItemSum
 FROM InvoiceLineItems li
 JOIN Invoices i ON li.InvoiceID = i.InvoiceID
 JOIN Vendors v ON i.VendorID = v.VendorID
-JOIN GLAccounts gla ON gla.AccountNo = v.DefaultAccountNo
-GROUP BY gla.AccountDescription, v.VendorState WITH CUBE
+JOIN GLAccounts gla ON gla.AccountNo = li.AccountNo
+GROUP BY AccountDescription, VendorState WITH CUBE
+
+SELECT InvoiceNumber
+	InvoiceTotal - CreditTital 0 OaymentTotal AS Balance,
+	RANK() OVER(ORDER BY Balance)AS BAlanceRank
+	From..
+	Where...
