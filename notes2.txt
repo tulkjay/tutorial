@@ -179,9 +179,12 @@ SYSDATETIMEOFFSET
 DAY, MONTH, YEAR, <=function(date)
 DATENAME, DATEPART - getting date name spelled out.
 DATEADD, DATEDIFF, -- takes a datepart parameter to specify which part to work on.
+Datediff returns integer difference.
+
 TODATETIMEOFFSET,
 SWITCHOFFSET,
 EOMONTH,
 DATEFROMPARTS,
-ISDATE-returns 1 or 0 if possible
+ISDATE-returns 1 or 0 if possible. Also useful for time.
+
 
