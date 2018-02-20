@@ -160,3 +160,6 @@ UNICODE(string)
 
 nifty: CHAR functions: tab(9), line feed(10), carriage returns(13)
 
+Chapter 9 functions
+String functions: LEN, LTRIM, RTRIM, LEFT, RIGHT, SUBSTRING, REPLACE, REVERSE,
+CHARINDEX, PATINDEX - used to find the starting location of item.
