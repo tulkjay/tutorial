@@ -163,3 +163,25 @@ nifty: CHAR functions: tab(9), line feed(10), carriage returns(13)
 Chapter 9 functions
 String functions: LEN, LTRIM, RTRIM, LEFT, RIGHT, SUBSTRING, REPLACE, REVERSE,
 CHARINDEX, PATINDEX - used to find the starting location of item.
+
+CONCAT, LOWER, UPPER, SPACE
+P267 for examples of string formatting.
+
+nifty: Splitting full name into first and last name
+
+Numeric functions
+ROUND, ISNUMERIC, CEILING, FLOOR, SQUARE, SQRT, RAND()
+p271: Formatting and floating results
+
+Datetime functions
+GETDATE, GETUTCDATE, SYSDATETIME --datetime2 type,
+SYSDATETIMEOFFSET
+DAY, MONTH, YEAR, <=function(date)
+DATENAME, DATEPART - getting date name spelled out.
+DATEADD, DATEDIFF, -- takes a datepart parameter to specify which part to work on.
+TODATETIMEOFFSET,
+SWITCHOFFSET,
+EOMONTH,
+DATEFROMPARTS,
+ISDATE-returns 1 or 0 if possible
+
