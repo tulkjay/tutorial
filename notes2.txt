@@ -110,3 +110,5 @@ WHEN NOT MATCHED [BY TARGET]
 WHEN NOT MATCHED BY SOURCE
 
 MERGE must be ended with a semicolon.
+WHEN NOT MATCHED BY SOURCE is used to delete a row from the target table.
+
