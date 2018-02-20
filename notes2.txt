@@ -1,0 +1,12 @@
+Chapter 6 Subqueries
+WHERE
+HAVING
+FROM
+SELECT
+
+Usually in FROM and WHERE.
+
+Can return scalar(single value), single column, or  table.
+
+Order by inside of subquery is used to position data into the correct location.
+Do actual ordering on outer query.
