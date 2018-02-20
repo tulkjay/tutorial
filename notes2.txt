@@ -54,3 +54,19 @@ two selects joined with union all.
 First select returns single row to be marked as the top.
 Second select runs until recursive member returns 0 rows.
 Recursive member has to be able to return 0 rows, or else infinite loop.
+
+Chapter 7 Action Queries
+Insert, Update, Delete
+SELECT INTO
+Table building process. sends results into new table.
+No keys are transferred. Usually used for debugging/copying.
+
+INSERT
+INSERT [INTO] tableName [(column_list)]
+VALUES ()[, ()...]
+
+Column list order does not matter.
+
+Default and null values.
+Omit identity values, can omit nulls or items with default values.
+nifty: Insert into tableName DEFAULT VALUES;
