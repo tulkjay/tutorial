@@ -57,7 +57,7 @@ Recursive member has to be able to return 0 rows, or else infinite loop.
 
 Chapter 7 Action Queries
 Insert, Update, Delete
-SELECT INTO
+SELECT * INTO newTableName FROM expression/w/e
 Table building process. sends results into new table.
 No keys are transferred. Usually used for debugging/copying.
 
@@ -70,3 +70,43 @@ Column list order does not matter.
 Default and null values.
 Omit identity values, can omit nulls or items with default values.
 nifty: Insert into tableName DEFAULT VALUES;
+INSERT INTO tableName
+(columns)
+SELECT () from ...
+
+UPDATE
+UPDATE tableName
+SET columnName = ''[,...]
+[FROM tableSource
+WHERE expression]
+
+Mixing in subqueries with UPDATE
+...
+SET column = (SELECT MAX(...) FROM tableName)
+...
+
+Can add FROM query before WHERE to filter down list.
+
+FROM can join tables and create a complex query.
+
+DELETE
+DELETE [FROM] tableName
+[FROM table_source]
+[WHERE search_condition]
+
+without where, all rows get wiped.
+TRUNCATE OPERATION will remove everything and reset auto incrementor.
+TRUNCATE cannot be used for a table with foreign keys.
+
+Delete is performed on rows.
+
+MERGE
+Merge multiple rows from one table to another.
+MERGE [INTO] table_target
+USING table_source
+ON join_condition
+[WHEN MATCHED [AND search_condition] THEN statement]
+WHEN NOT MATCHED [BY TARGET]
+WHEN NOT MATCHED BY SOURCE
+
+MERGE must be ended with a semicolon.
