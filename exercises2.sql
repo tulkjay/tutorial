@@ -103,11 +103,12 @@ INSERT INTO InvoiceCopy (VendorID, InvoiceTotal, TermsID, InvoiceNumber, Payment
 VALUES (32, 434.58, 2, 'AX-014-027', 0.00, '07/8/2016', '06/21/2016', 0.00, NULL)
 
 --3
-BEGIN TRAN
 INSERT INTO VendorCopy
-SELECT [VendorName], [VendorAddress1], [VendorAddress2], [VendorCity], [VendorState], [VendorZipCode], [VendorPhone], [VendorContactLName], [VendorContactFName], [DefaultTermsID], [DefaultAccountNo] FROM Vendors
+SELECT [VendorName], [VendorAddress1], [VendorAddress2], [VendorCity],
+	[VendorState], [VendorZipCode], [VendorPhone], [VendorContactLName],
+	[VendorContactFName], [DefaultTermsID], [DefaultAccountNo] 
+FROM Vendors
 WHERE VendorState <> 'CA'
-ROLLBACK TRAN
 
 --4
 UPDATE VendorCopy
@@ -117,15 +118,15 @@ WHERE DefaultAccountNo = 400
 --5
 UPDATE InvoiceCopy
 SET PaymentDate = GETDATE(),
-PaymentTotal = InvoiceTotal - PaymentTotal + CreditTotal
-WHERE InvoiceTotal - PaymentTotal + CreditTotal > 0
+PaymentTotal = InvoiceTotal - CreditTotal
+WHERE InvoiceTotal - CreditTotal - PaymentTotal > 0
 
 --6
 UPDATE InvoiceCopy
 SET TermsID = 2
 WHERE InvoiceCopy.VendorID IN (
-	SELECT VendorCopy.VendorID FROM VendorCopy
-	WHERE VendorCopy.DefaultTermsID = 2
+	SELECT VendorID FROM VendorCopy
+	WHERE DefaultTermsID = 2
 )
 
 --7
@@ -134,3 +135,15 @@ SET TermsID = 2
 FROM InvoiceCopy i JOIN VendorCopy v
 ON i.VendorID = v.VendorID
 WHERE v.DefaultTermsID = 2
+
+--8
+DELETE FROM VendorCopy
+WHERE VendorState = 'MN'
+
+--9
+DELETE VendorCopy
+WHERE VendorState NOT IN
+(SELECT DISTINCT v.VendorState
+	FROM VendorCopy v JOIN InvoiceCopy i
+	ON v.VendorID = i.VendorID)
+
