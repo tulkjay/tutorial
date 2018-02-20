@@ -30,3 +30,27 @@ Prefix column names with table names in order to prevent accidental outer query 
 
 [NOT] EXISTS
 Shows if subquery returns a data set.
+Common to use SELECT * with EXISTS subquery.
+
+Joining to subquery. Apply alias to subquery in order to reference it in the JOIN condition.
+
+Generally more efficient to save subquery as a view.
+
+User defined functions return views to be filtered on.
+Subquery can be used in select clause, or outer join can be used.
+
+Common table expressions = Take a non-correlated SQ expression and give it a table name.
+WITH cte_name AS (subquery)
+[, more ctes or main query]
+
+As more ctes are defined, they can refer to previously defined ctes
+Semicolons are required to be used to terminate lines prior to WITH.
+
+Can only be used once.
+
+Recursive CTE
+Anchor member and recursive member.
+two selects joined with union all.
+First select returns single row to be marked as the top.
+Second select runs until recursive member returns 0 rows.
+Recursive member has to be able to return 0 rows, or else infinite loop.
