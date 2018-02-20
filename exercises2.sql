@@ -37,3 +37,53 @@ WHERE i.InvoiceID  IN (
 	WHERE InvoiceSequence > 1
 )
 
+--5
+SELECT VendorName, Invoices.InvoiceID, InvoiceSequence, InvoiceLineItemAmount
+FROM Vendors JOIN Invoices 
+  ON Vendors.VendorID = Invoices.VendorID
+JOIN InvoiceLineItems
+  ON Invoices.InvoiceID = InvoiceLineItems.InvoiceID
+WHERE Invoices.InvoiceID IN
+      (SELECT InvoiceID
+       FROM InvoiceLineItems
+       WHERE InvoiceSequence > 1)
+ORDER BY VendorName, Invoices.InvoiceID, InvoiceSequence;
+
+--6
+SELECT SUM(InvoiceMax) AS SumOfMaximums
+FROM (SELECT VendorID, MAX(InvoiceTotal) AS InvoiceMax
+      FROM Invoices
+      WHERE InvoiceTotal - CreditTotal - PaymentTotal > 0
+      GROUP BY VendorID) AS MaxInvoice;
+
+--7
+SELECT VendorName, VendorCity, VendorState
+FROM Vendors
+WHERE VendorState + VendorCity NOT IN 
+	(SELECT VendorState + VendorCity
+	FROM Vendors
+	GROUP BY VendorState + VendorCity
+	HAVING COUNT(*) > 1)
+ORDER BY VendorState, VendorCity;
+
+--8
+SELECT VendorName, InvoiceNumber AS FirstInv,
+       InvoiceDate, InvoiceTotal
+FROM Invoices AS I_Main JOIN Vendors
+  ON I_Main.VendorID = Vendors.VendorID
+WHERE InvoiceDate =
+  (SELECT MIN(InvoiceDate)
+   FROM Invoices AS I_Sub
+   WHERE I_Sub.VendorID = I_Main.VendorID)
+ORDER BY VendorName;
+
+--9
+WITH MaxInvoice AS
+(
+    SELECT VendorID, MAX(InvoiceTotal) AS InvoiceMax
+    FROM Invoices
+    WHERE InvoiceTotal - CreditTotal - PaymentTotal > 0
+    GROUP BY VendorID
+)
+SELECT SUM(InvoiceMax) AS SumOfMaximums
+FROM MaxInvoice;
