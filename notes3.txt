@@ -32,4 +32,26 @@ Normal forms
     -Increases complexity.
 
 Chapter 11 - Creating a DB
+CREATE, ALTER, DROP
 
+function, procedure, triggers, views
+
+#name = temporary table.
+@@ global variable
+## global temporary table.
+Gets purged when connection drops.
+
+Other identifiers can be delimited. Best Practice is to not.
+Up to 128 characters.
+
+CREATE DATABASE name
+
+Will use server defaults for names, unless otherwise specified.
+
+CREATE TABLE name (column name data-type [column attributes]...)
+[, table_attributes]
+
+Up to 1024 columns
+SPARSE - Used to optimize NULL values.
+    Used if many instances will have NULL values(ie international phone number). Usually if >60% have NULL.
+ 
