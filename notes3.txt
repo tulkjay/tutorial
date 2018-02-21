@@ -78,3 +78,29 @@ To return custom error response, wrap execution(probably a stored procedure)
     with try catch and return desired response.
 Easier to handle rules on application side.
 
+Foreign keys   
+Column level
+REFERENCES tableName (columnName)
+    [ON DELETE {CASCADE|NO_ACTION}] --NO_ACTION is default
+    [ON UPDATE {CASCADE|NO_ACTION}] --NO_ACTION is default
+
+Table level
+FOREIGN KEY (columnName1, ...)
+REFERENCES tableName (columnName, ...)
+    [ON DELETE {CASCADE|NO_ACTION}] --NO_ACTION is default
+    [ON UPDATE {CASCADE|NO_ACTION}] --NO_ACTION is default
+
+DROP
+Will delete foreign keys and constraints as well.
+
+ALTER TABLE name [WITH_CHECK|WITH NOCHECK]
+    ADD, DROP, ALTER, ...
+
+Sequence
+CREATE SEQUENCE
+Useful for setting default value on table if no primary key.
+use NEXT VALUE FOR sequenceName
+
+You can restart a sequence with an ALTER SEQUENCE statement.
+
+When creating a table, foreign key tables must be defined first.
