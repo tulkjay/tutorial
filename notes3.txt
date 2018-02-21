@@ -1,0 +1,35 @@
+Chapter 10 Designing a DB
+Table represents an entity
+Row is instance of entity
+Column is attribute
+You can use CASE - computer aided software engineering.
+Composite key - two of more columns.
+Keys maintain referential integrity.
+
+You can use cascade delete to remove referenced instances.
+In addition to cascade delete, you can set to NULL or some other default.
+Cascade rule is set on each individual relation.
+
+Normalization
+Saves on space, but increases complexity.
+Data warehouses or Staging databases might flatten tables to make faster querying.
+
+Index when column is a foreign key.
+"" used frequently.
+"" lots of distinct values.
+"" updated infrequently.
+
+Clustered index is tracking index(usually primary key).
+Not good to reassign because reordering has to occur.
+
+Composite index includes two or more columns.
+
+Normal forms
+1 - Scalar values for each column(ie: full name => first, last)
+2 - non-key column is dependent on primary key.
+3 - non-key column is dependent only on primary key.
+5 - Break down relations to minimize data redundancy.
+    -Increases complexity.
+
+Chapter 11 - Creating a DB
+
