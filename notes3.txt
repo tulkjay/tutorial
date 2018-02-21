@@ -104,3 +104,15 @@ use NEXT VALUE FOR sequenceName
 You can restart a sequence with an ALTER SEQUENCE statement.
 
 When creating a table, foreign key tables must be defined first.
+
+Chapter 12 Using SSMS
+Log file has heavy i/o.
+SAN - storage area network.
+SAN gets set up with slow and fast storage areas.
+Containment type in options - security feature.
+    partial - Treats user in database as single login object.
+Collation is for database language. Can change to case sensitive here.
+
+You can generate a change script when modifying an object to see what will happen when save is clicked.
+
+
