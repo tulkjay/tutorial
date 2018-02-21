@@ -115,4 +115,8 @@ Collation is for database language. Can change to case sensitive here.
 
 You can generate a change script when modifying an object to see what will happen when save is clicked.
 
+Use icon buttons to manage foreign keys, indices, etc.
+
+Use WITH SCHEMABINDING on views to show error when trying to change its referenced schema.
+Use Script to to show script to execute action in new window.
 
