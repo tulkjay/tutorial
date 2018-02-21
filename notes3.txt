@@ -54,4 +54,27 @@ CREATE TABLE name (column name data-type [column attributes]...)
 Up to 1024 columns
 SPARSE - Used to optimize NULL values.
     Used if many instances will have NULL values(ie international phone number). Usually if >60% have NULL.
- 
+
+Creating indices.
+CREATE INDEX name ON tableName (columnName1, columnName2)
+WHERE condition
+
+Table seek is using index as opposed to Table scan.
+
+Using ctrl+k, ctrl+x to insert snippets
+
+Constraints
+Column level and table level
+Useful for defining composite Keys
+
+CHECK constraint limits values for a column.
+foreign keys are constraints.
+REFERENCES tableName columnName
+
+Constraints can be updated(with or without integrity checks)
+
+Can't be false or unknown for a check constraint result.
+To return custom error response, wrap execution(probably a stored procedure)
+    with try catch and return desired response.
+Easier to handle rules on application side.
+
