@@ -182,3 +182,29 @@ Created table cannot have foreign keys.
 ALTER and DROP PROC are used to modify/delete procedures.
 
 User defined functions
+Can return scalar value or table based on single or multiple tables.
+Need to specify schema it is involved with(usually dbo).
+You can join to a function.
+
+Scalar value function:
+CREATE FUNCTION schema_name.function_name
+([@parameter_name data_type [= default]])
+RETURNS money
+AS
+BEGIN
+RETURN scalar_expression
+END
+
+for table return:
+CREATE FUNCTION schema_name.function_name
+([@parameter_name data_type [= default]])
+RETURNS TABLE
+[AS]
+RETURN [select_statement]
+
+Defining a multi-statement table-valued function
+You need to define the structure of the return table.
+DROP and ALTER are used to manipulate functions
+
+Triggers
+Associated with tables, views, or database itself that execute in response to action occurring.
