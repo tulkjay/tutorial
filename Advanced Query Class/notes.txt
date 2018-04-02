@@ -27,3 +27,7 @@ DROP VIEW view_name
 ALTER VIEW same as view creation syntax.
 
 Inserts can only be done on a single table.
+
+*** Functions do not use Indices!
+Use line comparisons that do not modify columns instead.
+
