@@ -169,3 +169,16 @@ Or put If @asdf Is null
     select @asdf = default option.
 ...
 Ordinarily, optional parameters are listed last, so that naming the input variables is not required.
+Stored procedures RETURN value statement only returns integer values.
+
+THROW [error_number, message, state]
+Severity of user exception is always 16
+State code is for the user to define, and can be any value from 0-255
+You can pass a table as an input parameter
+In order to pass table, readonly flag must be placed on parameter.
+You also have to create a new table type with table definition.
+Created table cannot have foreign keys.
+
+ALTER and DROP PROC are used to modify/delete procedures.
+
+User defined functions
