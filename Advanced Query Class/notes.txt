@@ -1,4 +1,4 @@
-Views
+Chapter 13 - Views
 Select results stored as object, considered a virtual table.
 Reusable
 Cuts down building execution plan
@@ -30,4 +30,70 @@ Inserts can only be done on a single table.
 
 *** Functions do not use Indices!
 Use line comparisons that do not modify columns instead.
+When inspecting execution plan, prefer index seek instead of index scan
 
+Chapter 14 Scripts
+Usually used for running multiple scripts together.
+Use GO to separate batches
+USE - changes database context
+DECLARE variable_name type
+PRINT value
+SET variable_name = expression or value,
+EXEC
+
+Flow controls
+IF, ELSE
+BEGIN, END
+WHILE
+BREAK
+CONTINUE
+TRY, CATCH
+GOTO
+RETURN - Exits unconditionally
+
+Variables: prefix with @, can use comma separated values
+
+@@variable_name makes a global variable
+
+Table Variables
+DECLARE @table_name TABLE (column_name1 type [attributes], etc, table_attributes)
+Can be treated like a normal table
+
+Temporary table
+Select ...
+INTO #table_name
+FROM ...
+
+Then the temporary table may be used like a normal table.
+Temporary tables may also be created using the CREATE TABLE syntax.
+
+Table variable is stored in memory,
+temporary tables stored on disk
+
+Best to limit table variables to ~10000 rows, depending on data type.
+
+Flow controls
+IF bool_exp
+    {statement|BEGIN...END}
+[ELSE
+    {statement|BEGIN...END}]
+
+can be nested
+
+IF EXISTS object_name
+IE: DROP DATABASE IF EXISTS TestDb.
+Different ways:
+IF DB_ID('TestDb') IS NOT NULL
+    DROP DATABASE TestDb
+OR for tables, use object_id
+
+WHILE expression
+    {statement|BEGIN...END}
+    [BREAK]
+    [CONTINUE]
+
+Cursors
+Usually slower than using set operations
+Declare a cursor name for select statement.
+open cursor
+Cursor can be made read-only or modifiable(cursor will place locks on items if not read-only).
