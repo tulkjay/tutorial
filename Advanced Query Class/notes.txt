@@ -140,3 +140,32 @@ IE: Make a table where column names are results of query :O
 
 Dynamic sql string and user input can create sql injection.
 
+Chapter 15 - Stored Procedures, Functions, Triggers
+SPs, Functions, and triggers only have one batch.
+SPs and functions take parameters.
+
+CREATE PROCEDURE spName --Or PROC
+AS
+
+Does not have to return a result set.
+Includes input and output parameters.
+Fired off with EXEC spName.
+Execution plan might be modified as the sproc gets used.
+Like views, sprocs can be created with ENCRYPTION, so that the sproc cannot be modified.
+EXECUTE_AS_clause will recompile each time.
+Parameter list follows name
+
+IE: 
+CREATE PROC spTest
+    @DateVar smalldatetime = NULL,
+    @InvTotal money OUTPUT
+AS 
+SELECT @InvTotal = SUM(...)
+FROM ...
+WHERE ... > @DateVar
+
+= NULL is a default parameter option, runtime error will occur is no default is given.
+Or put If @asdf Is null
+    select @asdf = default option.
+...
+Ordinarily, optional parameters are listed last, so that naming the input variables is not required.
