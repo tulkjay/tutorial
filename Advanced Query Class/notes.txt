@@ -97,3 +97,46 @@ Usually slower than using set operations
 Declare a cursor name for select statement.
 open cursor
 Cursor can be made read-only or modifiable(cursor will place locks on items if not read-only).
+
+You loop through cursor fetch values to work row by row.
+when done, you close and deallocate cursor.
+
+FETCH NEXT FROM cursor_name INTO @temp_variables
+WHILE @@FETCH_STATUS <> -1
+    BEGIN
+        DOING STUFF
+        FETCH NEXT FROM cursor name into @temp variables
+    END;
+
+Usually don't use cursors unless needed.
+
+BEGIN TRY
+    {sql_statement|statement_block}
+END TRY
+BEGIN CATCH
+    {sql_statement|statement_block}
+END CATCH
+
+You can access ERROR_[number, message, severity, state] functions inside catch catch block.
+Severities 10 and under or 20 and over are not handled
+
+@@IDENTITY returns last id generated
+IDENT_CURRENT('table_name') returns last id generated for specified table.
+
+Usually SCOPE_IDENTITY() that returns latest generated in current scope.
+You can use HOST_NAME() or SYSTEM_USER to get current workstation and current user.
+
+Session settings can be changed
+SET setting_name value
+date format, 
+ansi_nulls(to use column = null syntax), 
+ansi_padding, 
+ROWCOUNT(to set top(n) for session)
+Useful is SET NOCOUNT {ON|OFF}
+
+EXEC aka EXECUTE - Used to create dynamic sql
+Runs a sql string
+IE: Make a table where column names are results of query :O
+
+Dynamic sql string and user input can create sql injection.
+
