@@ -1,3 +1,29 @@
 Views
-Select results stored as object
+Select results stored as object, considered a virtual table.
 Reusable
+Cuts down building execution plan
+Con: Can be wasteful if view is too broad for use case.
+Views can be used to remove sensitive columns/rows from tables
+Can hide the complexity of some queries
+
+CREATE VIEW name
+[WITH {ENCRYPTION|SCHEMABINDING}]   
+AS select_statement
+[WITH CHECK OPTION]
+
+Check options will secure rows(ie can't insert/update row to data outside of check option)
+Schemabinding will check for changes to referred tables.
+ENCRYPTION will prevent editing after creation
+
+Updatable views:
+No distinct/top, no aggregates, no calculated values, no grouping or having, no union.
+Only one table can be updated
+Useful for restricted access
+
+If view is not updatable, it is a read-only view
+
+Modifying a view
+DROP VIEW view_name
+ALTER VIEW same as view creation syntax.
+
+Inserts can only be done on a single table.
