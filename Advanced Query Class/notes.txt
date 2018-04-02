@@ -208,3 +208,15 @@ DROP and ALTER are used to manipulate functions
 
 Triggers
 Associated with tables, views, or database itself that execute in response to action occurring.
+Can be set up with encryption and EXECUTE_AS_clause
+
+IE:
+CREATE TRIGGER Vendors_INSERT_UPDATE
+    ON Vendors
+    AFTER INSERT, UPDATE
+AS
+    UPDATE Vendors
+    SET VendorState = UPPER(VendorState)
+    WHERE VendorId IN (SELECT VendorID FROM Inserted);
+Inserted and Deleted are temporary tables during scope of trigger.
+
