@@ -334,3 +334,16 @@ use built in stored procedures:
 sp_Xml_PrepareDocument(pointer_int OUTPUT, xml fragment or definition)
 sp_Xml_RemoveDocument pointer_int
 
+Chapter 19 Working with Binary data
+Storing the file on disk required double backup process.
+Filestream: limited only by OS, fast access, backed up with database, same security is used.
+Useful when most are larger than 1MB and fast read access is critical.
+
+Using varbinary(max)
+
+enable filestream in sql configuration manager
+run:
+    EXEC sp_configure filestream_access_level, 2;
+    reconfigure
+In SQL Server instance
+
