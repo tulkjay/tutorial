@@ -279,3 +279,58 @@ Deadlocks
 Tips for avoiding deadlocks
 Keep transactions short, move selects to outside transactions, do not request user input for open transaction
 **** Page 525
+
+Chapter 18 XML
+You can store uncommon variables in an XML column, the issue being that it takes time to pull value out.
+inserts/updates will check value against type attribute
+
+CREATE TABLE Log
+(EventID int NOT NULL IDENTITY PRIMARY KEY,
+EventData xml NOT NULL)
+
+Create trigger Db_CrateTable_DropTable
+    on database
+    after create_table, drop_table
+AS
+    Declare @EventData xml;
+    Select @EventData = EVENTDATA();
+    Insert Into Log values(@EventData);
+
+Without schema definition attached, string values do not have to be xml values(it is not enforced).
+
+If working with XML fragment, XML tab appears in SSMS, it can create a schema definition.
+
+XML functions: 
+IE: EventData.query|exist|value|modify|nodes
+query gets element with children and attributes
+exist returns 1 if true
+value: pull item out.
+usually, modify is not used, usually entire fragment is replaced.
+
+XQuery: 
+    starts with /
+    / is the separator
+    [] specifies an attribute
+
+CREATE XML SCHEMA COLLECTION name
+AS
+`
+    <xs:schema ...>
+    ...
+    </xs:schema>
+`;
+
+This schema can be used when defining an xml column for a table.
+
+DROP XML SCHEMA COLLECTION name
+
+Append FOR XML with keywords like RAW/AUTO, ROOT('VendorInvoices'), ELEMENTS
+
+To show xml in a tabular result set, use OPENXML
+
+Requires making a pointer to point to internal xml document.
+
+use built in stored procedures:
+sp_Xml_PrepareDocument(pointer_int OUTPUT, xml fragment or definition)
+sp_Xml_RemoveDocument pointer_int
+
