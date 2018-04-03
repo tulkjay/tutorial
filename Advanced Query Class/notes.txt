@@ -224,3 +224,58 @@ Name triggers in a descriptive way
 
 INSTEAD OF Trigger
 
+Chapter 16 Transactions and Locking
+Transactions
+Use transactions when the failure of any of the statements would violate data integrity.
+
+BEGIN, COMMIT, ROLLBACK
+
+SAVE creates a checkpoint/save_point.
+Transactions can be marked with a name, and can be nested.
+Transactions are stacked until COMMIT is called enough to set stack to 0.
+@@TRANCOUNT
+
+
+BEGIN TRAN;
+    ...
+    SAVE TRAN Vendor1;
+        ...
+        SAVE TRAN Vendor2;
+            ...
+        ROLLBACK TRAN Vendor2;
+        ...
+    ROLLBACK TRAN Vendor1;
+    ...
+COMMIT TRAN
+
+Transactions are handled in the order that they are received. If there are changes executing at the same time, concurrency can be an issue
+Dirty Reads
+Lost Updates
+Nonrepeatable reads(inconsistent analysis)
+Phantom reads
+
+Isolation levels - least to most
+READ UNCOMMITTED
+READ COMMITTED - default
+Repeatable read
+snapshot - does not place locks, but saves versions of rows in a tempDb
+serializable
+
+SET TRANSACTION ISOLATION LEVEL {level_Name}
+
+SQL Server and locking
+small -> large
+row -> key -> page -> extent -> Heap/B-tree -> table -> file -> metadata -> allocation unit -> database
+
+You want to balance locking too wide and locking too deep
+Locking is controlled by lock manager.
+
+Lock modes
+shared
+Exclusive
+
+Deadlocks
+
+Tips for avoiding deadlocks
+Keep transactions short, move selects to outside transactions, do not request user input for open transaction
+**** Page 525
