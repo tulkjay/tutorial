@@ -106,3 +106,7 @@ AS
     FROM Vendors JOIN Inserted I
     On Vendors.VendorID = I.VendorID
     WHERE I.InvoiceTotal  - I.PaymentTotal - I.CreditTotal = 0;
+
+--9
+CREATE TABLE TestUniqueNulls
+(RowID int IDENTITY NOT NULL, NoDupName varchar(20) NULL);
