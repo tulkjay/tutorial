@@ -223,3 +223,4 @@ Inserted and Deleted are temporary tables during scope of trigger.
 Name triggers in a descriptive way
 
 INSTEAD OF Trigger
+
