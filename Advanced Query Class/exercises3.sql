@@ -94,4 +94,15 @@ RETURNS TABLE AS RETURN
 	   WHERE InvoiceDate BETWEEN @DateMin AND @DateMax
 )
 
+--8
 SELECT * FROM [dbo].[fnDateRange] ('2016-03-15', '2016-03-20')
+
+Create Trigger Invoices_Update_Shipping
+    on Invoices,
+    After Insert, update
+AS
+    Insert ShippingLabels
+    Select VendorName, etc
+    FROM Vendors JOIN Inserted I
+    On Vendors.VendorID = I.VendorID
+    WHERE I.InvoiceTotal  - I.PaymentTotal - I.CreditTotal = 0;
