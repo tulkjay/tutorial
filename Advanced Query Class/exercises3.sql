@@ -1,19 +1,19 @@
 --Chapter 15
 --1
 CREATE PROC dbo.spBalanceRange
-    @VendorVar varchar(50) = '',
+    @VendorVar varchar(50) = '%',
     @BalanceMin money = 0,  
 	@BalanceMax money = 0
 AS
     SELECT v.VendorName,
 		i.InvoiceTotal,
 		i.InvoiceTotal - i.PaymentTotal - i.CreditTotal AS Balance
-	FROM Invoices i
-	JOIN Vendors v ON i.VendorID = v.VendorID
-	WHERE v.VendorName LIKE @VendorVar + '%'
-		AND i.InvoiceTotal - i.PaymentTotal - i.CreditTotal > @BalanceMin
-		AND i.InvoiceTotal - i.PaymentTotal - i.CreditTotal <= @BalanceMax
-	ORDER BY Balance
+	FROM Invoices i JOIN Vendors v
+		ON i.VendorID = v.VendorID
+	WHERE v.VendorName LIKE @VendorVar
+		AND (i.InvoiceTotal - i.PaymentTotal - i.CreditTotal ) > 0
+		AND (((i.InvoiceTotal - i.PaymentTotal - i.CreditTotal) BETWEEN @BalanceMin AND @BalanceMax) OR (@BalanceMax = 0))
+	ORDER BY Balance DESC
 
 --2
     --a
@@ -25,7 +25,7 @@ AS
 		@BalanceMax = 1000
     --c
     EXEC	[dbo].[spBalanceRange]
-		@VendorVar = '[C,F]%'
+		@VendorVar = '[C,F]%', @BalanceMax = 200
 
 --3
 ALTER PROCEDURE dbo.spDateRange 
@@ -40,16 +40,14 @@ AS
 		THROW 50001, 'Invalid minimum date.', 1
 	IF (ISDATE(@DateMax) <> 1)
 		THROW 50001, 'Invalid maximum date.', 1
-	IF(CONVERT(datetime, @DateMin) > CONVERT(datetime, @DateMax))
+	IF(CAST(@DateMin AS datetime) > CAST(@DateMax AS datetime))
 		THROW 50001, 'Minimum date cannot be later than maximum date.', 1;
 	SELECT
 		InvoiceNumber, InvoiceDate, InvoiceTotal, InvoiceTotal - PaymentTotal - CreditTotal AS Balance
 	FROM Invoices
-	WHERE InvoiceDate >= @DateMin 
-		AND InvoiceDate <= @DateMax
+	WHERE InvoiceDate BETWEEN @DateMin AND @DateMax
 		AND InvoiceTotal - PaymentTotal - CreditTotal > 0
 	ORDER BY InvoiceDate
-RETURN 0 
 
 --4
 BEGIN TRY
@@ -93,8 +91,7 @@ RETURNS TABLE AS RETURN
 	   InvoiceDate,
 	   InvoiceTotal - PaymentTotal - CreditTotal as Balance
 	   FROM Invoices
-	   WHERE InvoiceDate >= @DateMin AND InvoiceDate <= @DateMax
-	   AND InvoiceTotal - PaymentTotal - CreditTotal > 0
+	   WHERE InvoiceDate BETWEEN @DateMin AND @DateMax
 )
 
 SELECT * FROM [dbo].[fnDateRange] ('2016-03-15', '2016-03-20')
