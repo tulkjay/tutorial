@@ -347,3 +347,41 @@ run:
     reconfigure
 In SQL Server instance
 
+Chapter 20 CLR Integration
+Introduced in 2005, loads CLR engine into SQL engine, you can create stored procedures, functions, triggers, aggregate functions, and user-defined types(ie:email data type).
+Not as efficient or optimized as TSql statements.
+
+CLR
+Server -> Facets -> Surface Area Configuration -> ClrIntegrationEnabled -> True
+
+Imported using 
+    CREATE ASSEMBLY assembly_name
+    FROM client_assembly_path
+Can be dropped with DROP command
+
+Development of a CLR can be made with the SQL Server Data tools, which will allow you to create a SQL Server Database Project.
+SELECT COUNT(*) FROM Invoices;
+
+using System.Data.SqlTypes;
+using Microsoft.SqlServer.Server;
+
+public partial class StoredProcedures
+{
+    [Microsoft.SqlServer.Server.SqlProcedure]
+    public static SqlInt32 GetInvoiceCount ()
+    {
+        // Put your code here
+        return 0;
+    }
+}
+
+There are different data types that need to be used in the cs file(ie: SqlInt)
+
+Connection string just needs to set connection to true: 
+SqlConnection connection = new SqlConnection("Context connection=true");
+
+Place N in front of string literals to evaluate them as Unicode only.
+ie: N'Tést'
+
+To throw error in CLR, throw new ApplicationException
+
