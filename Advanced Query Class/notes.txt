@@ -405,3 +405,17 @@ You can print using SqlContext.Pipe.Send("Your message");
 
 Context can be accessed with SqlContext.TriggerContext;
 ie: SqlContext.TriggerContext.EventData.Value;
+
+
+Creating Aggregate function using CLR
+IE: convert string result into comma separated list
+ You need to define a set of functions for the aggregate to operate properly:
+ Init, Accumulate, Merge, Terminate, Read, Write
+ Read and Write are used in the case that the process is paused.
+
+ You can use Format.Native for user aggregates if all the data types used are normal(ie: SqlInt32, etc)
+
+ User defined types
+ Once defined, they can be used in table designer as well.
+ Custom data types do not show up at plain text, so ToString() can be used in select statement. fields can be accessed too.
+ 
