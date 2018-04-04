@@ -418,4 +418,46 @@ IE: convert string result into comma separated list
  User defined types
  Once defined, they can be used in table designer as well.
  Custom data types do not show up at plain text, so ToString() can be used in select statement. fields can be accessed too.
- 
+
+Chapter 17 Security
+Windows Auth Mode or Mixed mode for both windows auth and sql server auth used for access from non-windows users.
+Logins and users are separate, so a user is not required to make a login.
+You can do so from SQL using Create Login ,drop login, and alter login.
+Users are stored in databases, logins are stored for servers.
+You attach users to logins
+CREATE USER user_name
+FOR LOGIN login_name
+Alter and drop are used to change user things.
+
+CREATE SCHEMA schema_name 
+Supporting tables can be added to schemas
+Schemas cannot be dropped until all objects have been moved/deleted.
+
+Permissions can be modified with the GRANT AND REVOKE statements.
+ie: 
+GRANT INSERT, UPDATE, DELETE
+ON Invoices
+TO BlartBlernard
+
+Schema permissions can also be modified to add permissions on all tables handled by a schema
+Same for database permissions.
+
+WITH GRANT OPTION - User can also grant permission on object user is assigned permission to .
+Revoke will roll this up.
+
+Server permissions.
+
+Fixed Server Roles
+MSSQL comes with server roles that have set permissions on them.
+You can create your own server role, or add someone with the server role.
+CREATE SERVER ROLE roleName;
+
+GRANT ALTER permission name
+TO serverRoleName;
+
+Fixed database roles: can be altered, such as db_owner, db_*admin, db_datawriter/datareader, etc.
+
+You can create/GRANT/DROP/ALTER your own database roles.
+CREATE ROLE roleName 
+
+There are stored procedures to get additional information about roles: sp_HelpRole
