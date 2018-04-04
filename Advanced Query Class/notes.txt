@@ -385,3 +385,23 @@ ie: N'Tést'
 
 To throw error in CLR, throw new ApplicationException
 
+CLR procedures can call one another.
+
+Data sets are returned with the static SQLPipe object on SqlContext (SqlContext.Pipe.ExecuteAndSend(command));
+
+You need to set access level attribute for functions
+    ie: [Microsoft.SqlServer.Server.SqlFunction(DataAccess=DataAccessKind.Read)]
+
+Table value functions return an IEnumerable.
+
+SqlDataAdapter is used to fill resulting data set(which is then returned).
+
+Filling function must be made to fill data set row
+
+SqlTrigger attribute is used for defining triggers
+ie: [Microsoft.SqlServer.Server.SqlTrigger (Target="Vendors", Event="AFTER INSERT, UPDATE")]
+
+You can print using SqlContext.Pipe.Send("Your message");
+
+Context can be accessed with SqlContext.TriggerContext;
+ie: SqlContext.TriggerContext.EventData.Value;
