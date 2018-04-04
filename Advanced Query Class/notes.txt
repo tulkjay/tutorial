@@ -461,3 +461,13 @@ You can create/GRANT/DROP/ALTER your own database roles.
 CREATE ROLE roleName 
 
 There are stored procedures to get additional information about roles: sp_HelpRole
+
+DENY is opposite of GRANT(not revoke). Deny trumps other granted permissions.
+ie:
+DENY SELECT ON Invoices TO BobRobert
+
+Application roles
+For limiting a connection's permissions.
+Usually using WITH EXECUTE AS provides enough flexibility to handle this.
+Can be useful for limited connections to DB using shared accounts.
+
